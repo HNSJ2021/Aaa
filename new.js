@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "02.00 pm - 03.00 pm",
       "03.00 pm - 04.00 pm",
       "04.00 pm - 05.00 pm",
-      "05.00 pm - 06.00 pm",
+    
       
     ];
     timeSlots.forEach(slot => {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const totalCccharges = foreignAdultCount * charges["Foreign Adult"][selectedTimeType];
       const total = foreignChildCount * charges["Foreign Child"][selectedTimeType];
       const totalCcccharges =InfantCount * charges["Infant"][selectedTimeType];
-      // Calculate charges for other ticket categories
+    
   
       const totalPayable = totalCharges + totalCcharges + totalCccharges +  total+ totalCcccharges;
       
@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", function() {
         <table>
           <tr><td>Date</td><td>${selectedDate}</td></tr>
           <tr><td>Time</td><td>${selectedTime}</td></tr>
+          <tr>
+          <th>Duration</th>
+          <td id="selectedDuration">1 hr ( 01 Normal : 00 Peak)</td>
+      </tr>
           <tr><td>Tickets</td><td>Charges</td></tr>
           <tr><td>${slAdultCount} SL Adult</td><td>$${totalCharges}</td></tr>
           <tr><td>${slChildCount} slChild</td><td>$${totalCcharges}</td></tr>
@@ -127,6 +131,81 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   
     
+    updateSummary();
+  });
+  
+
+
+
+
+
+//peak hours//
+
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+  
+    const durationSelect = document.getElementById("duration");
+   
+    const timeSlots = [
+      "07.00 am - 08.00 am",
+      "08.00 am - 09.00 am",
+      "09.00 am - 10.00 am",
+      "10.00 am - 11.00 am (Peak)",
+      "11.00 am - 12.00 pm (Peak)",
+      "12.00 pm - 01.00 pm (Peak)",
+      "01.00 pm - 02.00 pm",
+      "02.00 pm - 03.00 pm (Peak)",
+      "03.00 pm - 04.00 pm (Peak)",
+      "05.00 pm - 06.00 pm (Peak)",
+     
+    ];
+  
+    timeSlots.forEach((slot) => {
+      const option = document.createElement("option");
+      option.value = slot;
+      option.textContent = slot;
+      durationSelect.appendChild(option);
+    });
+  
+    const charges = {
+      "SL Adult": { normal: 4, peak: 6 },
+      "slChild": { normal: 2, peak: 3 },
+      "Foreign Adult": { normal: 10, peak: 13 },
+      "Foreign Child": { normal: 5, peak: 8 },
+      "Infant": { normal: 0, peak: 0 },
+    
+    };
+  
+    function updateSummary() {
+      
+    }
+  
+    function validateInputs() {
+  
+    }
+  
+    selectedDateInput.addEventListener("change", () => {
+      updateSummary();
+      validateInputs();
+    });
+  
+    slAdultInput.addEventListener("input", () => {
+      updateSummary();
+      validateInputs();
+    });
+  
+    slChildInput.addEventListener("input", () => {
+      updateSummary();
+      validateInputs();
+    });
+  
+    
+  
+    durationSelect.addEventListener("change", () => {
+      updateSummary();
+    });
+  
     updateSummary();
   });
   
